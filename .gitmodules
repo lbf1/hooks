@@ -1,6 +1,12 @@
-[submodule "sub"]
-	path = sub
-	url = ./../sub
+[submodule "modules/sub1"]
+	path = modules/sub1
+	url = ./../hooks_sub1
+	branch = master
+	fetchRecurseSubmodules = true
+	update = merge 
+[submodule "modules/sub2"]
+	path = modules/sub2
+	url = ./../hooks_sub2
 	branch = master
 	fetchRecurseSubmodules = true
 	update = merge 
