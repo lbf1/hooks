@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#as a workaround until push --recurse-submodules can be set as default
+#push the submodules manually
+
+#normally submodule foreach sets the current path to that of the submodule
+#but the merge script assumes the path is the root dir of the parent repo
+if ! git submodule foreach "cd `pwd` && git/do_push.sh \$path" ; then
+	echo submodule push failed
+	exit 1
+fi

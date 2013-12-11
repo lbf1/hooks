@@ -1,0 +1,6 @@
+[submodule "sub"]
+	path = sub
+	url = ./../sub
+	branch = master
+	fetchRecurseSubmodules = true
+	update = merge 

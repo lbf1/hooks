@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#only for merge commits
+if [ -e .git/MERGE_HEAD ]; then
+	#Unless deselected, TortoiseGit commit adds the local submodule HEAD to the index before the commit
+	#so git submodule update does nothing. Instead try to find what to merge and do it.
+	
+	merge_head=`cat .git/MERGE_HEAD`
+	
+	#normally submodule foreach sets the current path to that of the submodule
+	#but the merge script assumes the path is the root dir of the parent repo
+	if ! git submodule foreach "cd `pwd` && git/do_merge.sh $merge_head \$path" ; then
+		echo submodule merge failed
+		exit 1
+	fi
+fi

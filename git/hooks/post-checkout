@@ -1,0 +1,18 @@
+#!/bin/sh
+old_head="$1"
+new_head="$2"
+flag="$3"
+
+#only for branch checkouts
+if [ "$flag" = "1" ]; then
+	#git submodule update
+	
+	branch_name=`git rev-parse --abbrev-ref HEAD`
+	
+	#normally submodule foreach sets the current path to that of the submodule
+	#but the merge script assumes the path is the root dir of the parent repo
+	if ! git submodule foreach "cd `pwd` && git/do_checkout.sh $branch_name \$path" ; then
+		echo submodule checkout failed
+		exit 1
+	fi
+fi
